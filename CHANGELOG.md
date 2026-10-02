@@ -1,3 +1,9 @@
+## 2.0.1
+
+### 🩹 Fixes
+
+- resolve internal type imports to compiled declarations ([05250e0](https://github.com/fundamentry/brand/commit/05250e0))
+
 # 2.0.0
 
 ### 🚀 Features
