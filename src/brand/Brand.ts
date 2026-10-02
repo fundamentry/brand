@@ -1,16 +1,19 @@
 declare const brand: unique symbol;
 
 export namespace Brand {
-  export type Branded<T, B> = T & {
-    readonly [brand]: B;
-  };
+  interface Marker<T, B extends PropertyKey> {
+    readonly [brand]: {
+      readonly base: T;
+      readonly names: { readonly [K in B]: K };
+    };
+  }
 
-  export type Unbranded<B extends Branded<unknown, unknown>> = Omit<
-    B,
-    typeof brand
-  >;
+  export type Any = Marker<unknown, never>;
 
-  export const nominal = <T extends Branded<unknown, unknown>>(
-    value: Unbranded<T>
-  ) => value as T;
+  export type Unbranded<T extends Any> = T[typeof brand]['base'];
+
+  export type Branded<T, B extends PropertyKey> = T &
+    Marker<T extends Any ? Unbranded<T> : T, B>;
+
+  export const nominal = <T extends Any>(value: Unbranded<T>) => value as T;
 }
