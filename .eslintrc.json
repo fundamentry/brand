@@ -24,6 +24,11 @@
             "pattern": "@fundamentry/*",
             "group": "internal",
             "position": "before"
+          },
+          {
+            "pattern": "#project/*",
+            "group": "parent",
+            "position": "before"
           }
         ],
         "pathGroupsExcludedImportTypes": [
